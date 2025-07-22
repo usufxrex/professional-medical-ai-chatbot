@@ -1,0 +1,16 @@
+application:
+  name: "Medical AI Chatbot"
+  version: "1.0.0"
+
+api:
+  host: "0.0.0.0"
+  port: 5000
+  debug: true
+
+diseases:
+  enabled:
+    - "lung_cancer"
+
+ai:
+  provider: "gemini"
+  model: "models/gemini-2.0-flash"

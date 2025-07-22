@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MediAI - Advanced Medical Intelligence{% endblock %}</title>
+    
+    <!-- Icons and Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <!-- Additional Head Content -->
+    {% block head %}{% endblock %}
+</head>
+<body class="medical-theme">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="medical-loader">
+                <div class="dna-strand">
+                    <div class="dna-segment"></div>
+                    <div class="dna-segment"></div>
+                    <div class="dna-segment"></div>
+                    <div class="dna-segment"></div>
+                </div>
+            </div>
+            <h3>Initializing Medical AI...</h3>
+            <p>Loading healthcare intelligence systems</p>
+            <div class="loading-progress">
+                <div class="progress-bar" id="loading-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Upload Modal -->
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    Upload Medical Document
+                </h3>
+                <button class="modal-close" id="upload-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-zone">
+                        <i class="fas fa-file-medical upload-icon"></i>
+                        <h4>Drop files here or click to browse</h4>
+                        <p>Supports: PDF, Images (JPG, PNG), Medical Reports, Datasets (CSV, Excel)</p>
+                        <p class="file-size-limit">Maximum file size: 16MB</p>
+                        <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.gif,.csv,.xlsx,.xls" style="display: none;">
+                        <button class="browse-btn" id="browse-btn">
+                            <i class="fas fa-folder-open"></i>
+                            Browse Files
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="upload-progress" id="upload-progress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="upload-progress-fill"></div>
+                    </div>
+                    <p class="progress-text" id="upload-progress-text">Uploading...</p>
+                </div>
+                
+                <div class="upload-result" id="upload-result" style="display: none;">
+                    <!-- Upload results will be shown here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset Management Modal -->
+    <div id="dataset-modal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-database"></i>
+                    Dataset Management
+                </h3>
+                <button class="modal-close" id="dataset-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="dataset-tabs">
+                    <button class="tab-btn active" data-tab="existing">
+                        <i class="fas fa-list"></i>
+                        Existing Datasets
+                    </button>
+                    <button class="tab-btn" data-tab="add-new">
+                        <i class="fas fa-plus"></i>
+                        Add New Dataset
+                    </button>
+                </div>
+                
+                <div class="tab-content">
+                    <div id="existing-datasets" class="tab-pane active">
+                        <div class="datasets-grid" id="datasets-grid">
+                            <!-- Existing datasets will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div id="add-new-dataset" class="tab-pane">
+                        <form id="new-dataset-form" class="dataset-form">
+                            <h4>Add New Medical Dataset</h4>
+                            
+                            <div class="form-group">
+                                <label for="dataset-name">Disease Name *</label>
+                                <input type="text" id="dataset-name" placeholder="e.g., diabetes, heart_disease" required>
+                                <small>Use lowercase with underscores (e.g., heart_disease)</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataset-display-name">Display Name *</label>
+                                <input type="text" id="dataset-display-name" placeholder="e.g., Diabetes Analysis" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataset-description">Description</label>
+                                <textarea id="dataset-description" rows="3" placeholder="Describe the medical condition and dataset"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataset-category">Medical Category</label>
+                                <select id="dataset-category">
+                                    <option value="General Medicine">General Medicine</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Oncology">Oncology</option>
+                                    <option value="Endocrinology">Endocrinology</option>
+                                    <option value="Neurology">Neurology</option>
+                                    <option value="Pulmonology">Pulmonology</option>
+                                    <option value="Dermatology">Dermatology</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataset-keywords">Keywords (comma-separated) *</label>
+                                <textarea id="dataset-keywords" rows="2" placeholder="diabetes, blood sugar, glucose, insulin, hyperglycemia" required></textarea>
+                                <small>Enter keywords that help identify this condition in user queries</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataset-target">Target Column</label>
+                                <input type="text" id="dataset-target" placeholder="e.g., diagnosis, outcome (optional - will auto-detect)">
+                                <small>Column containing the diagnosis/outcome (leave blank for auto-detection)</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataset-file">CSV Dataset File *</label>
+                                <input type="file" id="dataset-file" accept=".csv,.xlsx,.xls" required>
+                                <small>Upload your medical dataset in CSV or Excel format</small>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary" id="cancel-dataset">Cancel</button>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    Add Dataset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="app-container" style="display: none;">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Notification System -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    
+    {% block scripts %}{% endblock %}
+
+    <!-- Initialize App -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the application
+            initializeApp();
+        });
+    </script>
+</body>
+</html>

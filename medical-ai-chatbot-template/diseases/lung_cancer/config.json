@@ -1,0 +1,88 @@
+{
+    "disease_info": {
+        "name": "Lung Cancer Analysis",
+        "description": "Comprehensive lung cancer dataset analyzing patient symptoms, risk factors, demographics, and outcomes. Includes data on smoking history, age, gender, and various clinical symptoms.",
+        "category": "Oncology",
+        "version": "1.0",
+        "last_updated": "2025-01-01"
+    },
+    "keywords": [
+        "lung cancer",
+        "pulmonary cancer",
+        "lung tumor",
+        "lung mass",
+        "respiratory cancer",
+        "bronchial cancer",
+        "cough",
+        "coughing",
+        "persistent cough",
+        "chronic cough",
+        "shortness of breath",
+        "breathing difficulty",
+        "chest pain",
+        "chest discomfort",
+        "wheezing",
+        "fatigue",
+        "tiredness",
+        "weight loss",
+        "smoking",
+        "tobacco",
+        "cigarettes",
+        "nicotine",
+        "lung",
+        "respiratory",
+        "breathing",
+        "bronchial",
+        "pulmonary",
+        "yellow fingers",
+        "anxiety",
+        "chronic disease",
+        "allergy",
+        "alcohol",
+        "swallowing difficulty",
+        "dysphagia"
+    ],
+    "features": {
+        "demographic": [
+            "GENDER",
+            "AGE"
+        ],
+        "risk_factors": [
+            "SMOKING",
+            "ALCOHOL_CONSUMING",
+            "PEER_PRESSURE",
+            "CHRONIC_DISEASE"
+        ],
+        "symptoms": [
+            "YELLOW_FINGERS",
+            "ANXIETY",
+            "FATIGUE",
+            "ALLERGY",
+            "WHEEZING",
+            "COUGHING",
+            "SHORTNESS_OF_BREATH",
+            "SWALLOWING_DIFFICULTY",
+            "CHEST_PAIN"
+        ],
+        "target": "LUNG_CANCER"
+    },
+    "data_info": {
+        "total_features": 15,
+        "target_variable": "LUNG_CANCER",
+        "data_type": "csv",
+        "encoding_scheme": {
+            "binary_features": "1 = Yes/Present, 2 = No/Absent",
+            "gender": "M = Male, F = Female",
+            "target": "YES = Cancer Present, NO = Cancer Absent"
+        }
+    },
+    "analysis_capabilities": [
+        "Statistical Analysis",
+        "Risk Factor Identification",
+        "Demographic Insights",
+        "Symptom Correlation",
+        "Predictive Modeling",
+        "Data Visualization"
+    ],
+    "medical_disclaimer": "This dataset is for educational and research purposes only. Results should not be used for actual medical diagnosis or treatment decisions. Always consult qualified healthcare professionals for medical advice."
+}
